@@ -54,6 +54,14 @@ main{padding:16px 14px;max-width:640px;margin:0 auto}
 .badge.long{background:var(--lobster)}
 .addr{display:inline-flex;align-items:center;gap:6px;margin-top:4px;background:#eef4f5;border:1px solid #d3e2e5;border-radius:20px;padding:3px 10px;font-size:11.5px;font-weight:600;color:var(--tide)}
 .addr a{color:var(--tide);text-decoration:none}
+.vg{font-size:12.5px;line-height:1.5;color:var(--ink)}
+.vg b{color:var(--ocean)}
+.vtag{display:inline-block;font-size:10px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;padding:2px 8px;border-radius:12px;margin:8px 0 4px}
+.vtag.story{background:#eef4f5;color:var(--tide)}
+.vtag.broll{background:#f0ede4;color:#8a7a3d}
+.vtag.talk{background:#fdeceb;color:var(--lobster)}
+.vtag.drone{background:#e9f0ec;color:var(--kelp)}
+.vlist{font-size:12.5px;line-height:1.6;color:var(--ink);margin:0 0 2px 2px}
 .addr button{background:none;border:none;color:var(--mist);cursor:pointer;font-size:12px;padding:0 0 0 2px}
 
 
@@ -114,6 +122,7 @@ main{padding:16px 14px;max-width:640px;margin:0 auto}
   <button id="tab-itin" class="active" onclick="switchTab('itin')"><span class="ic">&#128506;</span>Itinerary</button>
   <button id="tab-exp" onclick="switchTab('exp')"><span class="ic">&#128181;</span>Expenses</button>
   <button id="tab-pack" onclick="switchTab('pack')"><span class="ic">&#127890;</span>Packing</button>
+  <button id="tab-vlog" onclick="switchTab('vlog')"><span class="ic">&#127909;</span>Vlog</button>
 </nav>
 
 <main id="app"><div class="loading">Loading your trip&hellip;</div></main>
@@ -277,7 +286,7 @@ function toast(msg){
 
 function switchTab(tab){
   currentTab = tab;
-  ["itin","exp","pack"].forEach(x=>document.getElementById("tab-"+x).classList.toggle("active", x===tab));
+  ["itin","exp","pack","vlog"].forEach(x=>document.getElementById("tab-"+x).classList.toggle("active", x===tab));
   document.getElementById("fab").classList.toggle("hidden", tab!=="exp");
   render();
 }
@@ -286,7 +295,8 @@ function render(){
   const app = document.getElementById("app");
   if(currentTab==="itin") app.innerHTML = renderItin();
   else if(currentTab==="exp") app.innerHTML = renderExp();
-  else app.innerHTML = renderPack();
+  else if(currentTab==="pack") app.innerHTML = renderPack();
+  else app.innerHTML = renderVlog();
 }
 
 function renderItin(){
@@ -419,6 +429,98 @@ function addExpense(){
   saveState();
   document.querySelector(".overlay").remove();
   render(); toast("Expense saved");
+}
+
+
+const VLOG = [
+ {day:"Day 1 \u00b7 Kingston \u2192 Qu\u00e9bec City",story:"The adventure begins \u2014 leaving home, hitting the road east, first night in Qu\u00e9bec City.",
+  film:["Packing bags at home","Loading the van (time-lapse)","Odometer at start","Everyone getting in + doors closing","First highway signs east","Rest stop stretch","Arriving Qu\u00e9bec City at night","Airbnb walk-in first impression"],
+  broll:"Keys in hand \u00b7 dashboard \u00b7 road lines \u00b7 passing trucks \u00b7 QC skyline at night \u00b7 street lights through windshield",
+  talk:"Intro clip before leaving: who's on the trip, the 9-day route, what you're most excited about.",
+  drone:"Slow reveal: camera rises from behind the loaded trunk to show the whole crew ready to go."},
+ {day:"Day 2 \u00b7 Qu\u00e9bec City \u2192 Moncton",story:"The long haul east \u2014 three provinces in one day, ending at the famous Magnetic Hill.",
+  film:["Morning coffee + packed lunch prep","Leaving QC","Edmundston gas stop","Packed lunch picnic","Fredericton river walk","New Brunswick welcome sign","Magnetic Hill car rolling 'uphill'","Moncton Airbnb arrival + cooking dinner"],
+  broll:"Coffee pouring + steam \u00b7 sandwich making hands \u00b7 gas pump \u00b7 province sign \u00b7 river boardwalk shoes \u00b7 dinner sizzling",
+  talk:"At Magnetic Hill: explain the illusion and film the reaction when the van rolls backward-uphill.",
+  drone:"Walking shot along Fredericton riverfront; slow pan across the water."},
+ {day:"Day 3 \u00b7 Hopewell Rocks + Fundy NP",story:"Walking the ocean floor at low tide, then watching the same spot drown at high tide \u2014 the tide day.",
+  film:["Early breakfast + packing out","Hopewell Rocks entrance sign","Walking DOWN to the ocean floor","Flowerpot rocks wide + close","Touching seaweed/mud, footprints","Lunch in Alma","Dickson Falls","Tent setup at Point Wolfe (time-lapse)","RETURN shot: same spot at high tide","Campfire dinner"],
+  broll:"Mud textures \u00b7 barnacles \u00b7 dripping seaweed \u00b7 kayakers at high tide \u00b7 waterfall slow-mo \u00b7 tent poles \u00b7 marshmallow close-up",
+  talk:"On the ocean floor: 'In 6 hours, where I'm standing will be under 14 metres of water.' Then the payoff clip at high tide from the platform.",
+  drone:"The signature shot: static wide from the SAME position at low tide and high tide \u2014 hold each 10s for a before/after transition."},
+ {day:"Day 4 \u00b7 Fundy \u2192 Cape Breton",story:"Breaking camp and the big push to Cape Breton Island \u2014 giant lobster included.",
+  film:["Camp teardown (time-lapse)","Big Lobster Shediac group photo shoot","Nova Scotia welcome sign","Truro lunch","Crossing Canso Causeway onto Cape Breton","First Cabot Trail views","Broad Cove camp setup in golden light"],
+  broll:"Rolled sleeping bags \u00b7 lobster statue details \u00b7 causeway water both sides \u00b7 winding road through windshield \u00b7 golden-hour tent",
+  talk:"At Canso Causeway: 'We just crossed onto Cape Breton \u2014 the part of this trip everyone told us about.'",
+  drone:"Slow pan from the beach at Broad Cove at dusk; walking reveal through the campsite trees to the ocean."},
+ {day:"Day 5 \u00b7 Cabot Trail Loop",story:"THE day \u2014 the full Cabot Trail: fishing villages, Meat Cove, highlands, Skyline Trail, ocean sunset.",
+  film:["Sunrise at Broad Cove beach","Neils Harbour lighthouse + buying scallops","White Point + seals","Meat Cove lookout","Bay St. Lawrence lunch shack","French Mountain lookoffs","Lone Shieling forest walk","Skyline Trail boardwalk + cliff viewpoint","Cooking scallops at camp","Sunset over the Gulf from Waves End"],
+  broll:"Lighthouse \u00b7 fishing boats \u00b7 lobster traps \u00b7 scallops in the pan sizzling \u00b7 winding cliff road \u00b7 boardwalk shoes \u00b7 grass blowing on headland \u00b7 sun hitting the water",
+  talk:"At Skyline viewpoint: 20 seconds on what you can see; at dinner: 'These scallops were on a boat this morning.'",
+  drone:"Skyline boardwalk slow walking shot toward the ocean; Meat Cove static wide holding the cliffs; sunset time-lapse from camp."},
+ {day:"Day 6 \u00b7 Rafting Day \u2192 Cottage",story:"Trading the highlands for a tidal wave \u2014 rafting the Shubenacadie bore, then a real bed.",
+  film:["Last camp teardown","Goodbye Cabot Trail drive","Truro grocery run","Wetsuit/gear-up moments","Rafting: ask the outfitter about their photo/video package (phones can't come)","Soaked after-shots + reactions","Night arrival at the cottage"],
+  broll:"Muddy boots \u00b7 wetsuits hanging \u00b7 river mud textures \u00b7 grocery cart \u00b7 cottage keys \u00b7 tired happy faces",
+  talk:"Before rafting: explain the tidal bore \u2014 a wave that reverses a river. After: everyone's one-word reaction, dripping wet.",
+  drone:"Walking reveal into the cottage; slow pan of the group collapsing onto real furniture."},
+ {day:"Day 7 \u00b7 Halifax \u00b7 Lunenburg \u00b7 Peggy's Cove",story:"The greatest-hits coastal day \u2014 city, postcard towns, a legendary lobster supper, and THE lighthouse at sunset.",
+  film:["Halifax boardwalk + Citadel","Mahone Bay three churches","Lunenburg colourful waterfront","Shore Club exterior + lobster supper (crackers, bibs, the works)","Hubbards beach","Peggy's Cove village + lighthouse","Sunset on the granite rocks"],
+  broll:"Harbour boats \u00b7 colourful facades \u00b7 lobster cracking close-up \u00b7 butter dip \u00b7 waves on granite slow-mo \u00b7 lighthouse against sky \u00b7 golden light on faces",
+  talk:"At the Shore Club: history in one line (since 1936). At Peggy's Cove: quiet 20s clip \u2014 favourite moment of the trip so far.",
+  drone:"Classic Peggy's Cove reveal: walk up over the granite until the lighthouse appears. Hold the sunset static wide for 15s."},
+ {day:"Day 8 \u00b7 Nova Scotia \u2192 Qu\u00e9bec City",story:"The long road back \u2014 new stops, covered bridges, and a St. Lawrence dinner.",
+  film:["Cottage checkout","Sackville Waterfowl Park boardwalk","Hartland covered bridge drive-through (film from inside the van)","Rivi\u00e8re-du-Loup dinner by the river","QC arrival"],
+  broll:"Boardwalk reflections \u00b7 birds \u00b7 bridge beams passing overhead \u00b7 St. Lawrence at dusk \u00b7 tired feet up",
+  talk:"Inside the covered bridge: 'This is the longest covered bridge in the world \u2014 391 metres.'",
+  drone:"Slow pan across the St. Lawrence at Rivi\u00e8re-du-Loup before dinner."},
+ {day:"Day 9 \u00b7 Home \u2192 Kingston",story:"The finale \u2014 bookend shots, the odometer reveal, and everyone's favourite memory.",
+  film:["Final morning in QC","FINAL ODOMETER (match Day 1 shot)","Arriving home","Unloading the van","Dirty camping gear pile","Each person: favourite memory (20s each)","Final group goodbye clip"],
+  broll:"Same driveway angle as Day 1 \u00b7 gear pile \u00b7 laundry mountain \u00b7 fading light",
+  talk:"Closing thoughts: total km, best meal, hardest moment, would you do it again?",
+  drone:"Mirror the opening: camera lowers behind the now-empty trunk. Full circle."}
+];
+
+const VLOG_RULES = [
+ {h:"Filming Rules \u2014 every clip", items:["LANDSCAPE always (portrait only for intentional Reels/Shorts)","Two hands, elbows tucked","Ninja walk \u2014 slow, bent knees","Never zoom \u2014 walk closer or shoot a separate close-up","Clips 5\u201315 seconds","Pause 2s before moving, 2s before stopping","Slow movements, no whip-pans","Horizons level","Wipe the lens \u2014 every time, salt spray is real here"]},
+ {h:"5-Shot Sequence \u2014 anything interesting", items:["1. Wide (where)","2. Medium (action)","3. Close-up (detail)","4. Over-the-shoulder","5. Reaction"]},
+ {h:"Every New Location", items:["Welcome sign","Parking/arrival","First impression reaction","Wide establishing","Mediums + close-ups","People interacting","Nature details","Food","Talking clip","Sunset if there"]},
+ {h:"Every Campsite", items:["Arrival + picking the spot","Tent setup","Cooking","Campfire","Night ambience","Morning coffee","Packing out"]},
+ {h:"Edit-Ready Sequences \u2014 think in 5 clips", items:["Coffee: bag \u2192 boil \u2192 pour \u2192 steam \u2192 first sip","Camp: bag \u2192 poles \u2192 stakes \u2192 done \u2192 relaxing","Drive: engine \u2192 dash \u2192 road \u2192 viewpoint \u2192 arrival sign"]}
+];
+
+function renderVlog(){
+  let html = `<div class="card vg"><b>Cinematic vlog plan</b> \u2014 matched to your locked itinerary. Check off must-film moments as you get them. Golden rule: LANDSCAPE, slow, 5\u201315s clips.</div>`;
+  VLOG.forEach((d,di)=>{
+    const open = state.openDays["vlog"+di] ? "open" : "";
+    const shots = d.film.map((it,ii)=>{
+      const k = "v"+di+"-"+ii;
+      const done = state.vlogChecks && state.vlogChecks[k] ? "done":"";
+      return `<div class="pk ${done}" onclick="toggleVlog('${k}')"><div class="box">${done?"\u2713":""}</div><div class="txt">${it}</div></div>`;
+    }).join("");
+    html += `<div class="card ${open}">
+      <div class="day-head" onclick="toggleDay('vlog${di}')">
+        <h2>${d.day}</h2><span class="date"><span class="chev">\u25b6</span></span>
+      </div>
+      <div class="day-body">
+        <span class="vtag story">Story</span><div class="vg">${d.story}</div>
+        <span class="vtag story">Must-film</span>${shots}
+        <span class="vtag broll">B-roll</span><div class="vlist">${d.broll}</div>
+        <span class="vtag talk">Talking clip</span><div class="vlist">${d.talk}</div>
+        <span class="vtag drone">Drone-style shot</span><div class="vlist">${d.drone}</div>
+      </div></div>`;
+  });
+  html += `<div class="section-title">Always-On Rules</div>`;
+  VLOG_RULES.forEach(r=>{
+    html += `<div class="card"><div class="vg" style="margin-bottom:6px"><b>${r.h}</b></div>` +
+      r.items.map(i=>`<div class="vlist">\u2022 ${i}</div>`).join("") + `</div>`;
+  });
+  return html;
+}
+
+function toggleVlog(k){
+  if(!state.vlogChecks) state.vlogChecks = {};
+  state.vlogChecks[k] = !state.vlogChecks[k];
+  saveState(); render();
 }
 
 function renderPack(){
