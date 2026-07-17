@@ -115,7 +115,7 @@ main{padding:16px 14px;max-width:640px;margin:0 auto}
 <body>
 <header>
   <h1>East Coast Canada Trip</h1>
-  <div class="sub">Kingston &harr; Nova Scotia &middot; Jul 17&ndash;25, 2026 &middot; 5 travellers</div>
+  <div class="sub">Kingston &harr; Nova Scotia &middot; Jul 17&ndash;26, 2026 &middot; 5 travellers</div>
 </header>
 <div class="wave"></div>
 <nav>
@@ -133,7 +133,7 @@ main{padding:16px 14px;max-width:640px;margin:0 auto}
 
 
 <script>
-const PEOPLE = ["Raabi","Bhaktaraj","Friend 1","Friend 2","Friend 3"];
+const PEOPLE = ["Raabi","Bhaktaraj","Dipen","Satish","Santosh"];
 const CATS = ["Accommodation","Food & Dining","Camp Gear","Vehicle & Gas","Activities"];
 const KEY = "eastcoast-trip-2026";
 
@@ -157,15 +157,15 @@ const ITINERARY = [
    {t:"2:00 PM",a:"Check in Point Wolfe campground",n:"Camping night 1",addr:"Point Wolfe Campground, Fundy National Park, NB"},
    {t:"3:00\u20135:15",a:"Back to Hopewell \u2014 high tide viewing",n:"High tide ~5 PM (confirm)"},
    {t:"6:00 PM",a:"Dinner at camp",n:""}]},
- {day:"Day 4",date:"Mon Jul 20",title:"Fundy \u2192 Cape Breton (no PEI)",badges:["camp"],stops:[
-   {t:"7:30 AM",a:"Breakfast, pack up, checkout",n:""},
-   {t:"8:15 AM",a:"Depart Point Wolfe",n:""},
-   {t:"10:15\u201311:00",a:"Shediac \u2014 Big Lobster",n:"Photo stop",addr:"The Big Lobster, Shediac, NB"},
-   {t:"~12:15 PM",a:"Amherst \u2014 gas break",n:""},
-   {t:"1:00\u20131:45",a:"Lunch in Truro",n:""},
-   {t:"~3:00 PM",a:"Antigonish stretch break",n:""},
-   {t:"~4:15 PM",a:"Cross Canso Causeway",n:""},
-   {t:"5:45\u20136:00 PM",a:"Arrive Broad Cove campground",n:"Camping night 2 \u2014 daylight to set up + cook",addr:"Broad Cove Campground, Cape Breton Highlands National Park, NS"}]},
+ {day:"Day 4",date:"Mon Jul 20",title:"Fundy \u2192 Cape Breton via Baddeck",badges:["camp"],stops:[
+   {t:"7:15 AM",a:"Breakfast, pack up, checkout",n:""},
+   {t:"8:00 AM",a:"Depart Point Wolfe",n:"No detours \u2014 straight toward Cape Breton"},
+   {t:"~10:00 AM",a:"Amherst \u2014 gas + stretch",n:""},
+   {t:"11:45\u201312:30",a:"Lunch in Truro",n:""},
+   {t:"~2:00 PM",a:"Antigonish \u2014 quick break",n:""},
+   {t:"~2:45 PM",a:"Cross Canso Causeway",n:""},
+   {t:"3:15\u20134:00 PM",a:"Baddeck \u2014 lakeside village stop",n:"Bras d'Or waterfront \u00b7 Alexander Graham Bell Museum if time",addr:"Baddeck, NS"},
+   {t:"~5:30 PM",a:"Arrive Broad Cove campground",n:"Camping night 2 \u2014 relaxed evening, cook dinner",addr:"Broad Cove Campground, Cape Breton Highlands National Park, NS"}]},
  {day:"Day 5",date:"Tue Jul 21",title:"Cabot Trail loop \u2192 Ch\u00e9ticamp",badges:["camp"],stops:[
    {t:"8:00 AM",a:"Depart Broad Cove",n:""},
    {t:"9:00\u20139:30",a:"Neils Harbour \u2014 coffee + buy scallops",n:"Tonight's dinner",addr:"Neils Harbour, NS"},
@@ -196,16 +196,26 @@ const ITINERARY = [
    {t:"4:00\u20136:00",a:"The Shore Club lobster supper",n:"Call ahead for 5",addr:"The Shore Club, Hubbards, NS"},
    {t:"6:30\u20139:00",a:"Peggy's Cove + sunset",n:"Sunset ~8:50 PM",addr:"Peggy's Cove Lighthouse, NS"},
    {t:"~9:50 PM",a:"Back at cottage",n:"Early bed \u2014 big drive tomorrow"}]},
- {day:"Day 8",date:"Fri Jul 24",title:"Nova Scotia \u2192 Quebec City",badges:["long"],stops:[
-   {t:"7:00 AM",a:"Depart cottage",n:""},
-   {t:"10:00\u201310:45",a:"Sackville NB \u2014 Waterfowl Park",n:"",addr:"Sackville Waterfowl Park, Sackville, NB"},
-   {t:"1:00\u20131:45",a:"Hartland NB \u2014 covered bridge + lunch",n:"World's longest",addr:"Hartland Covered Bridge, Hartland, NB"},
-   {t:"~3:00 PM",a:"Edmundston \u2014 gas only",n:""},
-   {t:"4:00\u20134:45",a:"Rivi\u00e8re-du-Loup \u2014 dinner",n:"",addr:"Rivi\u00e8re-du-Loup, QC"},
-   {t:"~7:00 PM",a:"Arrive Quebec City stay",n:"",addr:"891 Rue Ulysse, Sainte-Marie, QC"}]},
- {day:"Day 9",date:"Sat Jul 25",title:"Quebec City \u2192 Kingston",badges:[],stops:[
-   {t:"Morning",a:"Relaxed breakfast, pack up",n:"Optional short QC walk"},
-   {t:"10:00 AM",a:"Depart Quebec City",n:""},
+ {day:"Day 8",date:"Fri Jul 24",title:"Cottage \u2192 PEI \u2192 Shediac beach",badges:[],stops:[
+   {t:"7:30 AM",a:"Depart cottage",n:""},
+   {t:"~9:30 AM",a:"Caribou ferry terminal",n:"First-come first-served \u2014 arrive early for a morning sailing",addr:"Northumberland Ferries, Caribou, NS"},
+   {t:"75 min",a:"Ferry to Wood Islands, PEI",n:"Deck views \u2014 don't sit in the van"},
+   {t:"~12:15 PM",a:"Point Prim Lighthouse",n:"PEI's oldest \u2014 15 min off-route, quick + beautiful",addr:"Point Prim Lighthouse, PEI"},
+   {t:"1:00\u20133:30 PM",a:"Charlottetown \u2014 the main stop",n:"Waterfront boardwalk \u00b7 Victoria Row \u00b7 lobster roll lunch \u00b7 COWS ice cream (the PEI must-try)",addr:"Charlottetown, PEI"},
+   {t:"4:00\u20134:45 PM",a:"Victoria-by-the-Sea",n:"Tiny fishing village, right on the way to the bridge",addr:"Victoria-by-the-Sea, PEI"},
+   {t:"~5:15 PM",a:"Cross Confederation Bridge",n:"Toll paid leaving PEI",addr:"Confederation Bridge, PEI"},
+   {t:"~6:15 PM",a:"Arrive Shediac cottage",n:"Pointe-du-Ch\u00eane \u00b7 host Bencar \u00b7 exact address to come",addr:"Pointe-du-Ch\u00eane, Shediac, NB"},
+   {t:"Evening",a:"Parlee Beach + Big Lobster photo",n:"Both minutes from the cottage \u2014 relax, beach walk, rest up",addr:"Parlee Beach Provincial Park, NB"}]},
+ {day:"Day 9",date:"Sat Jul 25",title:"Shediac \u2192 Quebec City",badges:["long"],stops:[
+   {t:"Morning",a:"Parlee Beach walk if time",n:"",addr:"Parlee Beach Provincial Park, NB"},
+   {t:"~8:30 AM",a:"Depart Shediac",n:""},
+   {t:"~11:30 AM",a:"Hartland \u2014 covered bridge + lunch",n:"World's longest",addr:"Hartland Covered Bridge, Hartland, NB"},
+   {t:"~2:00 PM",a:"Pass Edmundston",n:"Gas only"},
+   {t:"3:00\u20133:45 PM",a:"Rivi\u00e8re-du-Loup \u2014 break",n:"",addr:"Rivi\u00e8re-du-Loup, QC"},
+   {t:"After 4:00 PM",a:"Check in \u2014 Le Loyer du Village",n:"Host Martine \u00b7 check-in 4pm \u00b7 conf HMF3M2JS95",addr:"1329 Rue Principale, Saint-Phil\u00e9mon, QC"}]},
+ {day:"Day 10",date:"Sun Jul 26",title:"Quebec City \u2192 Kingston",badges:[],stops:[
+   {t:"Morning",a:"Relaxed breakfast, pack up",n:"Checkout 12pm"},
+   {t:"~10:00 AM",a:"Depart",n:""},
    {t:"~1:00 PM",a:"Lunch en route",n:""},
    {t:"4:00\u20135:00 PM",a:"Arrive Kingston",n:"Trip complete!"}]}
 ];
@@ -217,10 +227,12 @@ const SEED_EXPENSES = [
  {id:4,name:"Broad Cove camping",cat:"Accommodation",amt:69.82,by:"Raabi",note:"Jul 20-21"},
  {id:5,name:"Waves End RV & Camp",cat:"Accommodation",amt:78.70,by:"Raabi",note:"Jul 21-22"},
  {id:6,name:"Cottage, Musquodoboit Harbour",cat:"Accommodation",amt:571.65,by:"Raabi",note:"Jul 22-24"},
- {id:7,name:"Quebec City return stay",cat:"Accommodation",amt:263.70,by:"Raabi",note:"Jul 24-25"},
+ {id:7,name:"Shediac cottage (Pointe-du-Ch\u00eane)",cat:"Accommodation",amt:261.15,by:"Raabi",note:"Jul 24-25"},
+ {id:11,name:"Quebec City \u2014 Le Loyer du Village",cat:"Accommodation",amt:376.04,by:"Raabi",note:"Jul 25-26, 1329 Rue Principale"},
  {id:8,name:"9-person tent",cat:"Camp Gear",amt:225.99,by:"Bhaktaraj",note:""},
  {id:9,name:"Rental minivan",cat:"Vehicle & Gas",amt:681.25,by:"Bhaktaraj",note:"Full trip, discounted"},
- {id:10,name:"Tidal bore rafting",cat:"Activities",amt:427.50,by:"Raabi",note:"Wed Jul 22, 4:30 PM"}
+ {id:10,name:"Tidal bore rafting",cat:"Activities",amt:427.50,by:"Raabi",note:"Wed Jul 22, 4:30 PM"},
+ {id:12,name:"Costco groceries (Kingston)",cat:"Food & Dining",amt:416.60,by:"Bhaktaraj",note:"Jul 16 \u2014 pre-trip shop"}
 ];
 
 const PACKING = [
@@ -237,7 +249,7 @@ let state = null;
 let currentTab = "itin";
 
 function defaultState(){
-  return {expenses: JSON.parse(JSON.stringify(SEED_EXPENSES)), nextId: 11, packed: {}, openDays: {"Day 1":true}};
+  return {expenses: JSON.parse(JSON.stringify(SEED_EXPENSES)), nextId: 13, packed: {}, openDays: {"Day 1":true}};
 }
 
 let memoryOnly = false;
@@ -375,7 +387,9 @@ function renderExp(){
     html += `<div class="subtot"><span>Subtotal</span><span>${money(sub)}</span></div></div>`;
   });
 
-  html += `<div class="section-title">Settle-up</div><div class="card settle">${settle}</div>`;
+  const paidRows = PEOPLE.map(p=>`<div class="exp-row"><div class="info"><div class="name">${p}</div></div><div class="amt">${money(paid[p])}</div></div>`).join("");
+  html += `<div class="section-title">Total paid by person</div><div class="card">${paidRows}<div class="subtot"><span>Total</span><span>${money(total)}</span></div></div>`;
+  html += `<div class="section-title">Settle-up (do this at the end of the trip)</div><div class="card settle">${settle}</div>`;
   html += `<div class="btnrow" style="margin-top:18px"><button class="btn ghost" onclick="exportData()">Backup data</button><button class="btn ghost" onclick="importData()">Restore backup</button></div>`;
   html += `<button class="reset-link" onclick="resetAll()">Reset all app data</button>`;
   return html;
@@ -470,12 +484,17 @@ const VLOG = [
   broll:"Harbour boats \u00b7 colourful facades \u00b7 lobster cracking close-up \u00b7 butter dip \u00b7 waves on granite slow-mo \u00b7 lighthouse against sky \u00b7 golden light on faces",
   talk:"At the Shore Club: history in one line (since 1936). At Peggy's Cove: quiet 20s clip \u2014 favourite moment of the trip so far.",
   drone:"Classic Peggy's Cove reveal: walk up over the granite until the lighthouse appears. Hold the sunset static wide for 15s."},
- {say:"\u201cHeading home \u2014 but we\u2019re taking a different route back so every stop today is brand new. Including the longest covered bridge in the world.\u201d",day:"Day 8 \u00b7 Nova Scotia \u2192 Qu\u00e9bec City",story:"The long road back \u2014 new stops, covered bridges, and a St. Lawrence dinner.",
-  film:["Cottage checkout","Sackville Waterfowl Park boardwalk","Hartland covered bridge drive-through (film from inside the van)","Rivi\u00e8re-du-Loup dinner by the river","QC arrival"],
-  broll:"Boardwalk reflections \u00b7 birds \u00b7 bridge beams passing overhead \u00b7 St. Lawrence at dusk \u00b7 tired feet up",
-  talk:"Inside the covered bridge: 'This is the longest covered bridge in the world \u2014 391 metres.'",
-  drone:"Slow pan across the St. Lawrence at Rivi\u00e8re-du-Loup before dinner."},
- {say:"\u201cFinal odometer check\u2026 that\u2019s the whole East Coast in 9 days. Time for everyone\u2019s favourite moment of the trip.\u201d",day:"Day 9 \u00b7 Home \u2192 Kingston",story:"The finale \u2014 bookend shots, the odometer reveal, and everyone's favourite memory.",
+ {say:"\u201cChange of plans \u2014 the good kind. Today we ferry to Prince Edward Island: red sand, lighthouses, the gentlest island in Canada. Tonight we sleep next to a beach in Shediac.\u201d",day:"Day 8 \u00b7 Cottage \u2192 PEI \u2192 Shediac",story:"The bonus island \u2014 ferry crossing, PEI towns and red-sand beaches, ending beachside in Shediac.",
+  film:["Cottage checkout","Ferry terminal + driving the van onto the boat","On-deck crossing shots","PEI welcome sign","Charlottetown streets + lunch","Point Prim Lighthouse","COWS ice cream first-bite reactions","Victoria-by-the-Sea harbour walk","Confederation Bridge crossing (passenger seat)","Shediac cottage arrival + Big Lobster photo + Parlee Beach evening"],
+  broll:"Ferry wake \u00b7 seagulls \u00b7 red cliffs \u00b7 island farm fields \u00b7 lighthouse \u00b7 bridge structure passing overhead \u00b7 beach grass at dusk",
+  talk:"On the ferry deck: why PEI made it back into the plan. On the beach: red sand close-up \u2014 the iron oxide story.",
+  drone:"Static wide from the ferry deck holding the horizon; slow walking reveal over a dune to the beach."},
+ {say:"\u201cLast big driving day \u2014 but first, a morning by the beach. Then the longest covered bridge in the world on the way to Qu\u00e9bec City.\u201d",day:"Day 9 \u00b7 Shediac \u2192 Qu\u00e9bec City",story:"Beach morning, then the road west \u2014 covered bridge, St. Lawrence, last night on the road.",
+  film:["Parlee Beach morning walk","Hartland covered bridge drive-through (inside the van)","Rivi\u00e8re-du-Loup break","Arrival at Le Loyer du Village, Saint-Phil\u00e9mon"],
+  broll:"Morning beach light \u00b7 bridge beams overhead \u00b7 St. Lawrence \u00b7 village streets at golden hour",
+  talk:"Inside the covered bridge: 'Longest covered bridge in the world \u2014 391 metres.'",
+  drone:"Slow pan across the St. Lawrence at Rivi\u00e8re-du-Loup."},
+ {say:"\u201cFinal odometer check\u2026 that\u2019s the whole East Coast \u2014 plus PEI \u2014 in 10 days. Time for everyone\u2019s favourite moment.\u201d",day:"Day 10 \u00b7 Home \u2192 Kingston",story:"The finale \u2014 bookend shots, the odometer reveal, everyone's favourite memory.",
   film:["Final morning in QC","FINAL ODOMETER (match Day 1 shot)","Arriving home","Unloading the van","Dirty camping gear pile","Each person: favourite memory (20s each)","Final group goodbye clip"],
   broll:"Same driveway angle as Day 1 \u00b7 gear pile \u00b7 laundry mountain \u00b7 fading light",
   talk:"Closing thoughts: total km, best meal, hardest moment, would you do it again?",
@@ -535,22 +554,25 @@ const DEFAULT_MEALS = [
  {d:"Day 5 \u00b7 Tue",b:"Cook at camp",l:"Bay St. Lawrence + packed backup",dn:"Scallops at Waves End camp"},
  {d:"Day 6 \u00b7 Wed",b:"Quick cook (breaking camp)",l:"Truro restaurant",dn:"Simple / grab-and-go after rafting"},
  {d:"Day 7 \u00b7 Thu",b:"Cook at cottage",l:"Lunenburg restaurant",dn:"Shore Club lobster supper"},
- {d:"Day 8 \u00b7 Fri",b:"Cook at cottage",l:"Hartland",dn:"Rivi\u00e8re-du-Loup restaurant"},
- {d:"Day 9 \u00b7 Sat",b:"QC caf\u00e9 / cook",l:"En route",dn:"Home!"}
+ {d:"Day 8 \u00b7 Fri",b:"Cook at cottage",l:"PEI \u2014 Charlottetown",dn:"Shediac \u2014 seafood or cook"},
+ {d:"Day 9 \u00b7 Sat",b:"Quick at cottage",l:"Hartland",dn:"Quebec City"},
+ {d:"Day 10 \u00b7 Sun",b:"QC caf\u00e9 / cook",l:"En route",dn:"Home!"}
 ];
 
 const GROCERY = [
- {stop:"Take from Kingston (pantry \u2014 don't overpack!)",note:"Only shelf-stable basics you already own. Everything fresh gets bought on the road.",
-  items:["Rice / pasta / dal (enough for ~4 camp dinners)","Spices kit (small containers, not full jars)","Cooking oil (small bottle)","Salt, pepper, masala mix","Tea / coffee + filter or kettle bags","Sugar (small)","Snack bars / trail mix for day 1","Condiment packets or small squeeze bottles"]},
- {stop:"Quebec City (Fri night / Sat morning)",note:"Just Saturday's drive covered \u2014 nothing more.",
-  items:["Bread / wraps for packed lunch","Sandwich fillings (cheese, veg, spreads)","Fruit for the van","Drive snacks + drinks","Ice for cooler if needed"]},
- {stop:"Moncton (Sat evening) \u2014 MAIN SHOP",note:"This covers 3 camping days (Sun\u2013Tue). Biggest shop of the trip.",
-  items:["Eggs + bread / oatmeal (3 camp breakfasts)","Milk (small) + butter","Veggies for 2\u20133 camp dinners","Protein for camp dinners (or canned backup)","Pasta sauce / curry base","Fruit + snacks restock","Marshmallows / campfire treats","Drinking water jug","ICE for cooler (buy again as needed)","Propane check \u2014 buy spare if under 2 canisters","Foil, paper towel if not packed"]},
+ {stop:"\u2713 Costco haul \u2014 already bought (Jul 16)",note:"On hand for the trip. Meat plan: portion + marinate + vacuum-pack, freeze by end of Thursday \u2014 frozen packs double as ice packs and thaw one meal at a time; cook as needed.",
+  items:["Water 500mL case","Pork belly \u00d72 + chicken thighs + breasts (FREEZE)","Eggs + milk","Bread, hot dog buns, tortillas \u00d72, Texas toast","Hoya ramen + trail mix + protein bars","Chips (Ruffles, Doritos) + sticky corn snacks","Apples, bananas, oranges","Tomatoes, mini cukes, romaine, sweet potato, asparagus, corn","Feta, OJ, marble cake","Salt + cooking spray"]},
+ {stop:"Take from Kingston \u2014 dry goods (tomorrow)",note:"Confirm + check off tomorrow when packing.",
+  items:["Rice / lentils (dal)","Spices kit (small containers)","Noodles","Cooking oil (small)","Tea / coffee + sugar","Condiment squeeze bottles"]},
+ {stop:"Quebec City (Fri night / Sat morning)",note:"Mostly covered by Costco \u2014 top-up only.",
+  items:["Fresh sandwich fillings if needed","Ice for cooler"]},
+ {stop:"Moncton (Sat evening) \u2014 top-up shop",note:"Much smaller now. Fresh + camp-specific only.",
+  items:["ICE for cooler","Marshmallows / campfire treats","Butter","Any fresh veg top-up","Propane check \u2014 spare if under 2 canisters","Foil, paper towel if not packed","Drinking water refill if low"]},
  {stop:"Neils Harbour (Tue morning)",note:"One thing only \u2014 but the best thing.",
-  items:["Fresh scallops for tonight's dinner (ask what came in today)","Butter / garlic if low"]},
- {stop:"Truro (Wed midday) \u2014 cottage restock",note:"Covers Thu + Fri at the cottage. Last big supermarket.",
-  items:["Breakfast for 2 cottage mornings","Snacks + drinks","Easy dinner backup for Wed late arrival","Fruit","Anything running low (coffee, milk, oil)"]}
-];
+  items:["Fresh scallops for tonight's dinner (ask what came in today)","Garlic if low"]},
+ {stop:"Truro (Wed midday) \u2014 cottage restock",note:"Covers Thu at the cottage + Fri breakfast. Last big supermarket.",
+  items:["Breakfast for 2 cottage mornings","Milk refill","Snacks + drinks top-up","Easy dinner backup for Wed late arrival","Anything running low"]}
+]
 
 function renderFood(){
   if(!state.mealPlan) state.mealPlan = JSON.parse(JSON.stringify(DEFAULT_MEALS));
