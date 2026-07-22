@@ -221,19 +221,26 @@ const ITINERARY = [
 ];
 
 const SEED_EXPENSES = [
- {id:1,name:"Quebec City Airbnb (out)",cat:"Accommodation",amt:243.40,by:"Raabi",note:"Jul 17-18"},
- {id:2,name:"Moncton Airbnb",cat:"Accommodation",amt:261.15,by:"Raabi",note:"Jul 18-19"},
- {id:3,name:"Point Wolfe camping, Fundy",cat:"Accommodation",amt:60.27,by:"Raabi",note:"Jul 19-20"},
- {id:4,name:"Broad Cove camping",cat:"Accommodation",amt:69.82,by:"Raabi",note:"Jul 20-21"},
- {id:5,name:"Waves End RV & Camp",cat:"Accommodation",amt:78.70,by:"Raabi",note:"Jul 21-22"},
- {id:6,name:"Cottage, Musquodoboit Harbour",cat:"Accommodation",amt:571.65,by:"Raabi",note:"Jul 22-24"},
- {id:7,name:"Shediac cottage (Pointe-du-Ch\u00eane)",cat:"Accommodation",amt:261.15,by:"Raabi",note:"Jul 24-25"},
- {id:11,name:"Quebec City \u2014 Le Loyer du Village",cat:"Accommodation",amt:376.04,by:"Raabi",note:"Jul 25-26, 1329 Rue Principale"},
- {id:8,name:"9-person tent",cat:"Camp Gear",amt:225.99,by:"Bhaktaraj",note:""},
- {id:9,name:"Rental minivan",cat:"Vehicle & Gas",amt:681.25,by:"Bhaktaraj",note:"Full trip, discounted"},
- {id:10,name:"Tidal bore rafting",cat:"Activities",amt:427.50,by:"Raabi",note:"Wed Jul 22, 4:30 PM"},
- {id:12,name:"Costco groceries (Kingston)",cat:"Food & Dining",amt:416.60,by:"Bhaktaraj",note:"Jul 16 \u2014 pre-trip shop"}
-];
+ {id:1,name:"Quebec City Airbnb (out)",cat:"Accommodation",amt:243.40,by:"Raabi",note:"Jul 17-18",ts:"2026-07-10T12:00:00"},
+ {id:2,name:"Moncton Airbnb",cat:"Accommodation",amt:261.15,by:"Raabi",note:"Jul 18-19",ts:"2026-07-10T12:01:00"},
+ {id:3,name:"Point Wolfe camping, Fundy",cat:"Accommodation",amt:60.27,by:"Raabi",note:"Jul 19-20",ts:"2026-07-10T12:02:00"},
+ {id:4,name:"Broad Cove camping",cat:"Accommodation",amt:69.82,by:"Raabi",note:"Jul 20-21",ts:"2026-07-10T12:03:00"},
+ {id:5,name:"Waves End RV & Camp",cat:"Accommodation",amt:78.70,by:"Raabi",note:"Jul 21-22",ts:"2026-07-10T12:04:00"},
+ {id:6,name:"Cottage, Musquodoboit Harbour",cat:"Accommodation",amt:571.65,by:"Raabi",note:"Jul 22-24",ts:"2026-07-10T12:05:00"},
+ {id:7,name:"Shediac cottage (Pointe-du-Ch\u00eane)",cat:"Accommodation",amt:261.15,by:"Raabi",note:"Jul 24-25",ts:"2026-07-10T12:06:00"},
+ {id:11,name:"Quebec City \u2014 Le Loyer du Village",cat:"Accommodation",amt:376.04,by:"Raabi",note:"Jul 25-26, 1329 Rue Principale",ts:"2026-07-10T12:07:00"},
+ {id:8,name:"9-person tent",cat:"Camp Gear",amt:225.99,by:"Bhaktaraj",note:"",ts:"2026-07-10T12:08:00"},
+ {id:9,name:"Rental minivan",cat:"Vehicle & Gas",amt:681.25,by:"Bhaktaraj",note:"Full trip, discounted",ts:"2026-07-10T12:09:00"},
+ {id:10,name:"Tidal bore rafting",cat:"Activities",amt:427.50,by:"Raabi",note:"Wed Jul 22, 4:30 PM",ts:"2026-07-10T12:10:00"},
+ {id:12,name:"Costco groceries (Kingston)",cat:"Food & Dining",amt:416.60,by:"Bhaktaraj",note:"Jul 16 \u2014 pre-trip shop",ts:"2026-07-16T20:21:00"},
+ {id:14,name:"Gas",cat:"Vehicle & Gas",amt:60.29,by:"Santosh",note:"Gas",ts:"2026-07-17T09:30:00"},
+ {id:16,name:"Walmart accessories",cat:"Accommodation",amt:66.90,by:"Santosh",note:"",ts:"2026-07-17T11:00:00"},
+ {id:17,name:"McDonalds",cat:"Food & Dining",amt:72.35,by:"Santosh",note:"",ts:"2026-07-17T13:15:00"},
+ {id:18,name:"Excess",cat:"Food & Dining",amt:13.00,by:"Raabi",note:"Pringles",ts:"2026-07-17T14:00:00"},
+ {id:19,name:"Campsite upgrade",cat:"Accommodation",amt:13.10,by:"Raabi",note:"",ts:"2026-07-17T15:00:00"},
+ {id:20,name:"Gas",cat:"Vehicle & Gas",amt:113.16,by:"Santosh",note:"",ts:"2026-07-18T10:00:00"},
+ {id:21,name:"Tim Hortons",cat:"Food & Dining",amt:20.00,by:"Raabi",note:"",ts:"2026-07-18T08:00:00"}
+]
 
 const PACKING = [
  {sec:"Personal \u2014 Clothing (each)",items:["T-shirts / casual tops (4\u20135)","Quick-dry shirts (2\u20133)","Hiking pants / leggings (1\u20132)","Shorts (1\u20132)","Warm layer \u2014 fleece/sweater","Rain jacket / windbreaker","Sleepwear","Underwear + socks (9 days or 5\u20136 + laundry)","Swimsuit (1\u20132)","One nicer outfit (photos / lobster supper)"]},
@@ -249,7 +256,7 @@ let state = null;
 let currentTab = "itin";
 
 function defaultState(){
-  return {expenses: JSON.parse(JSON.stringify(SEED_EXPENSES)), nextId: 13, packed: {}, openDays: {"Day 1":true}};
+  return {expenses: JSON.parse(JSON.stringify(SEED_EXPENSES)), nextId: 22, packed: {}, openDays: {"Day 1":true}};
 }
 
 let memoryOnly = false;
@@ -286,6 +293,15 @@ function importData(){
     state = parsed;
     saveState(); render(); toast("Backup restored");
   }catch(e){ toast("That doesn't look like a valid backup"); }
+}
+
+
+function fmtTs(ts){
+  if(!ts) return "";
+  const d = new Date(ts);
+  if(isNaN(d)) return "";
+  return d.toLocaleDateString("en-CA",{month:"short",day:"numeric"}) + ", " +
+         d.toLocaleTimeString("en-CA",{hour:"numeric",minute:"2-digit"});
 }
 
 function money(n){ return "$" + n.toLocaleString("en-CA",{minimumFractionDigits:2,maximumFractionDigits:2}); }
@@ -373,6 +389,15 @@ function renderExp(){
     <div class="tot alt"><div class="lbl">Per person (\u00f75)</div><div class="val">${money(perPerson)}</div></div>
   </div>`;
 
+  // Recent activity \u2014 newest first, chronological log
+  const sorted = [...state.expenses].sort((a,b)=> (b.ts||"").localeCompare(a.ts||""));
+  html += `<div class="section-title">Recent activity \u2014 newest first</div><div class="card">`;
+  html += sorted.slice(0,12).map(e=>
+    `<div class="exp-row"><div class="info"><div class="name">${e.name}</div><div class="meta">${e.by}${e.ts?" \u00b7 "+fmtTs(e.ts):""}</div></div><div class="amt">${money(e.amt)}</div></div>`
+  ).join("");
+  if(sorted.length>12) html += `<div class="meta" style="padding-top:8px;text-align:center">+ ${sorted.length-12} more below by category</div>`;
+  html += `</div>`;
+
   CATS.forEach(cat=>{
     const items = state.expenses.filter(e=>e.cat===cat);
     if(!items.length) return;
@@ -380,7 +405,7 @@ function renderExp(){
     html += `<div class="section-title">${cat}</div><div class="card">`;
     html += items.map(e=>
       `<div class="exp-row">
-        <div class="info"><div class="name">${e.name}</div><div class="meta">${e.by}${e.note?" \u00b7 "+e.note:""}</div></div>
+        <div class="info"><div class="name">${e.name}</div><div class="meta">${e.by}${e.note?" \u00b7 "+e.note:""}${e.ts?" \u00b7 "+fmtTs(e.ts):""}</div></div>
         <div class="amt">${money(e.amt)}<span class="pp">${money(e.amt/5)}/pp</span></div>
         <button class="del" onclick="delExpense(${e.id})">\u2715</button>
       </div>`).join("");
@@ -440,7 +465,8 @@ function addExpense(){
     amt: Math.round(amt*100)/100,
     cat: document.getElementById("f-cat").value,
     by: document.getElementById("f-by").value,
-    note: document.getElementById("f-note").value.trim()
+    note: document.getElementById("f-note").value.trim(),
+    ts: new Date().toISOString()
   });
   saveState();
   document.querySelector(".overlay").remove();
